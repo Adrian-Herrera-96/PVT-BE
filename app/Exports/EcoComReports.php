@@ -42,7 +42,14 @@ class EcoComReports implements FromCollection, WithHeadings, ShouldAutoSize
                         ELSE ''
                     END,
                     ''
-                )) AS mensaje";
+                )) AS mensaje,
+                eco_com_updated_pensions.rent_type as AM_tipo_renta,
+                eco_com_updated_pensions.aps_total_fsa as AM_fraccion_saldo_acumulada_APS,
+                eco_com_updated_pensions.aps_total_cc as AM_fraccion_compensacion_cotizaciones_APS,
+                eco_com_updated_pensions.aps_total_fs as AM_fraccion_solidaria_vejez_APS,
+                eco_com_updated_pensions.aps_disability as AM_pension_de_invalidez,
+                eco_com_updated_pensions.aps_total_death as AM_pension_por_muerte,
+                eco_com_updated_pensions.total_rent as AM_total_renta_AM";
                 $data = EconomicComplement::where("economic_complements.eco_com_procedure_id",$this->eco_com_procedure_id)
                     ->groupBy("economic_complements.affiliate_id",
                     "economic_complements.code",
@@ -102,6 +109,7 @@ class EcoComReports implements FromCollection, WithHeadings, ShouldAutoSize
                     "affiliate_devices.verified",
                     "affiliate_tokens.api_token",
                     "affiliate_tokens.firebase_token",
+                    "eco_com_updated_pensions.rent_type",
                     "eco_com_updated_pensions.aps_total_fsa",
                     "eco_com_updated_pensions.aps_total_cc",
                     "eco_com_updated_pensions.aps_total_fs",
@@ -244,6 +252,13 @@ class EcoComReports implements FromCollection, WithHeadings, ShouldAutoSize
                     "Contraste C.I",
                     "Notificación",
                     "Validado por",
+                    "AM_tipo_renta",
+                    "AM_fraccion_saldo_acumulada_APS",
+                    "AM_fraccion_compensacion_cotizaciones_APS",
+                    "AM_fraccion_solidaria_vejez_APS",
+                    "AM_pension_de_invalidez",
+                    "AM_pension_por_muerte",
+                    "AM_total_renta"
                 ];
                 break;
             case 2:
